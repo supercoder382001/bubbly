@@ -1,6 +1,6 @@
 import requests
-# import json
-from flask import Flask
+import json
+from flask import Flask,request,jsonify
 
 app = Flask(__name__)
 
@@ -8,14 +8,33 @@ app = Flask(__name__)
 def home():
     return 'Hello, World!'
 
-@app.route('/func')
+@app.route('/Process',methods=['POST'])
 def func():
+    data = request.get_json()
+
+    # Check if data is provided
+    if not data:
+        return jsonify({"error": "No JSON data provided"}), 400
+
+    # Access individual parameters from the JSON
+    param1 = data.get('channel')
+    param2 = data.get('upiid')
+    param3 = data.get('paymentmode')
+    param4 = data.get('orderid')
+    param5 = data.get('amount')
+
+    # Example processing
+    if not param1 or not param2 or not param3 or not param4 or not param5:
+        return jsonify({"error": "Missing parameters"}), 400
+
+    # Example response
+
     url = "https://sandbox.cashfree.com/pg/orders/sessions"
     body = {
         "payment_method": {
             "upi": {
-                "channel": "collect",
-                "upi_id": "testtpvfail@gocash",
+                "channel": param1,
+                "upi_id": param2,
                 "upi_redirect_url": True,
                 "upi_expiry_minutes": 10
             }
@@ -31,4 +50,3 @@ def func():
     }
     response = requests.post(url, headers=headers, json=body)
     return response.json()
-    # import requests
