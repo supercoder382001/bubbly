@@ -1,5 +1,7 @@
 # import requests
 # import json
+import json
+
 from flask import Flask,request,jsonify
 # from initiate import initiate_
 # from processorder import process_
@@ -33,4 +35,4 @@ def validate():
         "message": True,
         "url": "ABC"
     }
-    return data.json
+    return json.dumps(data)
