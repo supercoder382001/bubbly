@@ -32,8 +32,9 @@ def process():
 
 @app.route('/Validate',methods=['GET'])
 def validate():
+    response=request.get_json()
     data = {
         "message": True,
         "url": "ABC"
     }
-    return json.dumps(data)
+    return json.dumps(response)
