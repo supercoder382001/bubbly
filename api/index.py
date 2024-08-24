@@ -32,9 +32,22 @@ def process():
 
 @app.route('/Validate',methods=['GET'])
 def validate():
-    response=request.get_json()
-    data = {
+    data = request.get_json()
+
+    # Check if data is provided
+    if not data:
+        return jsonify({"error": "No JSON data provided"}), 400
+
+    # Access individual parameters from the JSON
+    param4 = data.get('orderid')
+    param5 = data.get('upiid')
+    # Example processing
+    if not param4 or not param5:
+        return jsonify({"error": "Missing parameters"}), 400
+
+
+    res = {
         "message": True,
         "url": "ABC"
     }
-    return json.dumps(response)
+    return json.dumps(res)
