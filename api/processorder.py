@@ -1,3 +1,4 @@
+import json
 
 
 def process_():
@@ -6,4 +7,4 @@ def process_():
         "message" : True,
         "url" : "ABC"
     }
-    return data.json()
+    return json.dumps(data)
