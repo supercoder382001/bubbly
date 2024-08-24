@@ -16,7 +16,7 @@ def create():
         "message": True,
         "url": "ABC"
     }
-    return data.json()
+    return data.json
 
 
 @app.route('/Process',methods=['POST'])
@@ -25,11 +25,12 @@ def process():
         "message": True,
         "url": "ABC"
     }
-    return data.json()
+    return data
+
 @app.route('/Validate',methods=['GET'])
 def validate():
     data = {
         "message": True,
         "url": "ABC"
     }
-    return data.json()
+    return data.json
