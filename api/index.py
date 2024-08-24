@@ -30,7 +30,7 @@ def process():
     }
     return data
 
-@app.route('/Validate',methods=['GET'])
+@app.route('/Validate',methods=['POST'])
 def validate():
     data = request.get_json()
 
