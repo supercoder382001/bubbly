@@ -100,6 +100,7 @@ def status():
 
     # Access individual parameters from the JSON
     param4 = data.get('orderid')
+    param5 = data.get('paymentid')
     # Example processing
     if not param4 or not param5:
         return jsonify({"error": "Missing parameters"}), 400
