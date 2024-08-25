@@ -37,7 +37,8 @@ def create():
         }
         return json.dumps(res)
     req = {
-        "message": True
+        "message": True,
+        "orderid":"11234567"
     }
     return json.dumps(req)
 
@@ -57,8 +58,11 @@ def process():
     param4 = data.get('orderid')
     param5 = data.get('amount')
     param6 = data.get('paymentmode')
+    param7 = data.get('upiid')
+    param8 = data.get('sessionid')
+
     # Example processing
-    if not param4 or not param5 or not param6 :
+    if not param4 or not param5 or not param6 or not param7:
         res = {
             "message": "Missing parameters",
             "Status Code": 400
@@ -102,7 +106,26 @@ def status():
     param4 = data.get('orderid')
     param5 = data.get('paymentid')
     # Example processing
-    if not param4 or not param5:
+    if not param4:
+        return jsonify({"error": "Missing parameters"}), 400
+    res = {
+        "payment_status": "Success"
+    }
+    return json.dumps(res)
+
+@app.route('/Cancel',methods=['POST'])
+def Cancel():
+    data = request.get_json()
+
+    # Check if data is provided
+    if not data:
+        return jsonify({"error": "No JSON data provided"}), 400
+
+    # Access individual parameters from the JSON
+    param4 = data.get('orderid')
+    param5 = data.get('paymentid')
+    # Example processing
+    if not param4:
         return jsonify({"error": "Missing parameters"}), 400
     res = {
         "message": True
